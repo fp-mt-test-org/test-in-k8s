@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test-in-k8s
+    backstage.io/kubernetes-id: test-in-k8s
+  name: test-in-k8s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-in-k8s
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-in-k8s
+        backstage.io/kubernetes-id: test-in-k8s
+    spec:
+      containers:
+      - image: test-in-k8s:0.0.1-SNAPSHOT
+        imagePullPolicy: Never
+        name: test-in-k8s
+        resources: {}
+        ports:
+          - containerPort: 8080 
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          periodSeconds: 5
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test-in-k8s
+    backstage.io/kubernetes-id: test-in-k8s
+  name: test-in-k8s
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: test-in-k8s
+  type: ClusterIP
+status:
+  loadBalancer: {}

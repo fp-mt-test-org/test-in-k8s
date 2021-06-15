@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "test-in-k8s"
+  description: "Created via remote backstage instance"
+  annotations:
+    github.com/project-slug: fp-mt-test-org/test-in-k8s
+    backstage.io/techdocs-ref: url:https://github.com/fp-mt-test-org/test-in-k8s
+    backstage.io/kubernetes-id: test-in-k8s
+spec:
+  type: service
+  lifecycle: experimental
+  owner: "alinamchin"
